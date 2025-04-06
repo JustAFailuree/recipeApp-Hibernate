@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Szczegóły Przepisu</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/CSS/details.css}">
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <div class="box">
+      <figure class="image is-4by3">
+        <img th:src="@{${recipe.imagePath}}" alt="Zdjęcie przepisu">
+      </figure>
+
+      <h1 class="title" th:text="${recipe.title}"></h1>
+
+      <h3 class="subtitle has-text-white">Kategoria: </h3>
+      <p class="has-text-white" th:text="${recipe.category}"></p>
+
+      <h3 class="subtitle has-text-white">Czas przygotowania:</h3>
+      <p class="has-text-white" th:text="${recipe.time + ' min'}"></p>
+
+      <h3 class="subtitle has-text-white">Trudność:</h3>
+      <p class="has-text-white" th:text="${recipe.difficulty}"></p>
+
+      <h3 class="subtitle has-text-white">Składniki:</h3>
+      <p class="has-text-white" th:text="${recipe.ingredients}"></p>
+
+      <h3 class="subtitle">Przygotowanie:</h3>
+      <p class="has-text-white" th:text="${recipe.steps}"></p>
+
+      <h3 class="subtitle">Komentarze:</h3>
+      <div class="content" th:each="comment : ${recipe.comments}">
+        <p>
+          <strong th:text="${comment.user.username}"></strong>:
+          <span th:text="${comment.content}"></span>
+        </p>
+        <p class="is-size-7 has-text-grey">
+          <span th:text="${#temporals.format(comment.createdAt, 'dd-MM-yyyy HH:mm')}"></span>
+        </p>
+        <hr>
+      </div>
+
+      <form th:action="@{/recipes/{id}/add-comment(id=${recipe.id})}" method="post">
+        <div class="field">
+          <label class="label has-text-white">Dodaj komentarz</label>
+          <div class="control">
+            <textarea class="textarea" name="content" required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="button is-primary">Dodaj komentarz</button>
+      </form>
+
+      <div th:if="${isOwner}">
+        <a th:href="@{'/recipes/' + ${recipe.id} + '/edit'}" class="button is-primary">Edytuj przepis</a>
+      </div>
+
+      <div th:if="${isOwner}">
+        <form th:action="@{/recipes/{id}/delete(id=${recipe.id})}" method="post">
+          <button type="submit" class="button is-primary">Usuń</button>
+        </form>
+      </div>
+
+      <a href="/recipes" class="button is-primary">Powrót do listy</a>
+
+    </div>
+  </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,67 @@
+:root{
+    --ColorGrad1: #1A1A1D;
+    --ColorGrad2: #3B1C32;
+    --ColorGrad3: #6A1E55;
+    --ColorGrad4: #A64D79;
+}
+
+body{
+    color:white;
+    background: linear-gradient(var(--ColorGrad2), var(--ColorGrad1));
+}
+
+.section {
+    padding-top: 2rem;
+}
+
+.container {
+    max-width: 800px;
+}
+
+.box {
+    background: var(--ColorGrad1);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 10px 20px 20px black;
+}
+
+.image img {
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.title {
+    text-align: center;
+    color: white;
+}
+
+.subtitle {
+    margin-top: 1.5rem;
+    color: white;
+}
+
+p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.content {
+    background: #fafafa;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+textarea {
+    margin-top: 0.5rem;
+}
+
+.button.is-primary {
+    background: linear-gradient(to left, var(--ColorGrad4), var(--ColorGrad3));
+    color: white;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.button.is-primary:hover {
+    background: linear-gradient(to left, var(--ColorGrad3), var(--ColorGrad4));
+}

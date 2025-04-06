@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edytuj Przepis</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <h1 class="title has-text-centered">Edytuj Przepis</h1>
+
+        <form th:action="@{/recipes/{id}/edit(id=${recipe.id})}" method="POST" enctype="multipart/form-data">
+            <div class="field">
+                <label class="label" for="title">Tytuł</label>
+                <div class="control">
+                    <input class="input" type="text" id="title" name="title" th:value="${recipe.title}" required />
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="ingredients">Składniki</label>
+                <div class="control">
+                    <textarea class="textarea" id="ingredients" name="ingredients" required>[[${recipe.ingredients}]]</textarea>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="steps">Kroki przygotowania</label>
+                <div class="control">
+                    <textarea class="textarea" id="steps" name="steps" required>[[${recipe.steps}]]</textarea>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="time">Czas przygotowania (min)</label>
+                <div class="control">
+                    <input class="input" type="number" id="time" name="time" th:value="${recipe.time}" required />
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="difficulty">Trudność</label>
+                <div class="control">
+                    <input class="input" type="text" id="difficulty" name="difficulty" th:value="${recipe.difficulty}" required />
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="category">Kategoria</label>
+                <div class="control">
+                    <input class="input" type="text" id="category" name="category" th:value="${recipe.category}" required />
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Aktualne zdjęcie</label>
+                <figure class="image is-4by3">
+                    <img th:src="@{${recipe.imagePath}}" alt="Zdjęcie przepisu">
+                </figure>
+            </div>
+
+            <div class="field">
+                <label class="label" for="imageFile">Nowe zdjęcie (opcjonalnie)</label>
+                <div class="control">
+                    <input class="input" type="file" id="imageFile" name="imageFile" />
+                </div>
+            </div>
+
+            <div class="field">
+                <button class="button is-primary is-fullwidth" type="submit">Zapisz zmiany</button>
+            </div>
+        </form>
+
+        <a href="/recipes" class="button is-light is-fullwidth">Anuluj</a>
+    </div>
+</section>
+</body>
+</html>

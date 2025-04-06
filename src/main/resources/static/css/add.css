@@ -1,0 +1,84 @@
+:root{
+    --ColorGrad1: #1A1A1D;
+    --ColorGrad2: #3B1C32;
+    --ColorGrad3: #6A1E55;
+    --ColorGrad4: #A64D79;
+}
+
+.navbar, .navbar-menu.is-active{
+    background-color: var(--ColorGrad1);
+}
+
+.navbar-item{
+    color: white;
+}
+
+.navbar .navbar-item:hover {
+    background-color: var(--link);
+    background: linear-gradient(0.25turn, var(--ColorGrad1), var(--ColorGrad2));
+    color: whitesmoke;
+}
+
+body{
+    color:white;
+    background: linear-gradient(var(--ColorGrad2), var(--ColorGrad1));
+}
+
+.section {
+    padding-top: 2rem;
+}
+
+.container {
+    max-width: 600px;
+    background: var(--ColorGrad1);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 10px 20px 20px black;
+}
+
+h1.title {
+    margin-bottom: 1.5rem;
+    color: #363636;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 120px;
+}
+
+button {
+    color: white;
+    background: linear-gradient(to left, var(--ColorGrad4), var(--ColorGrad3));
+    font-weight: bold;
+    padding: 0.75rem;
+    width: 10%;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    color: white;
+    background: linear-gradient(to left, var(--ColorGrad3), var(--ColorGrad4));
+}
+
+.footer{
+    background-color: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj Przepis</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/add.css}">
+</head>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+
+        <a href="/index" class="navbar-item">
+            Strona Główna
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+            <a href="/recipes" class="navbar-item">Przepisy</a>
+            <a href="/add_recipe" class="navbar-item">Dodaj Przepis</a>
+        </div>
+
+        <div class="navbar-end">
+            <a href="/logout" class="navbar-item">
+                <span>Wyloguj</span>
+            </a>
+        </div>
+    </div>
+</nav>
+<body>
+<section class="section">
+    <div class="container">
+        <h1 class="title has-text-centered has-text-white">Dodaj Przepis</h1>
+
+        <form method="POST" action="/recipe/add" enctype="multipart/form-data">
+            <div>
+                <label for="title">Tytuł</label>
+                <input type="text" id="title" name="title" required />
+            </div>
+            <div>
+                <label for="ingredients">Składniki</label>
+                <textarea id="ingredients" name="ingredients" required></textarea>
+            </div>
+            <div>
+                <label for="steps">Kroki przygotowania</label>
+                <textarea id="steps" name="steps" required></textarea>
+            </div>
+            <div>
+                <label for="time">Czas przygotowania</label>
+                <input type="number" id="time" name="time" required />
+            </div>
+            <div>
+                <label for="difficulty">Trudność</label>
+                <input type="text" id="difficulty" name="difficulty" required />
+            </div>
+            <div>
+                <label for="image">Zdjęcie</label>
+                <input type="file" id="image" name="image" />
+            </div>
+            <div>
+                <label for="category">Kategoria</label>
+                <input type="text" id="category" name="category" required />
+            </div>
+            <button type="submit">Dodaj przepis</button>
+        </form>
+    </div>
+</section>
+<div class="footer">
+    <div class="columns">
+
+        <div class="column has-text-centered has-text-white">
+            <p>Copyright © CatFish</p>
+        </div>
+
+        <div class="column">
+            <h4 class="bd-footer-title
+                       has-text-weight-medium
+                       has-text-left
+                       has-text-white">
+                Schedule
+            </h4>
+            <p class="bd-footer-link
+                      has-text-left
+                      has-text-white">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Nullam sed sem ac lorem tincidunt placerat vel quis diam.
+            </p>
+        </div>
+
+        <div class="column">
+            <h4 class="bd-footer-title
+                       has-text-weight-medium
+                       has-text-justify
+                       has-text-white">
+                Address
+            </h4>
+            <p class="bd-footer-link has-text-white">
+                MAI 33, Antananarivo 105, Madagaskar
+            </p>
+
+        </div>
+
+        <div class="column">
+            <h4 class="bd-footer-title
+                       has-text-weight-medium
+                       has-text-justify
+                       has-text-white">
+                Contact us
+            </h4>
+
+            <p class="bd-footer-link has-text-white">
+            <p class="has-text-white">ContactUs@example.com</p>
+            <p class="has-text-white">+261 34 05 024 91 </p>
+            <a href="https://www.sancristobal.mg/">Web Page</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function submitRating(recipeId, score) {
+        fetch(`/recipes/${recipeId}/rate?score=${score}`, { method: 'POST' })
+            .then(response => window.location.reload());
+    }
+
+     document.addEventListener('DOMContentLoaded', () => {
+
+      const burger = document.querySelector('.navbar-burger');
+      const menu = document.querySelector('#navbarMenu');
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+    });
+</script>
+</html>

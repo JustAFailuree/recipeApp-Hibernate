@@ -1,0 +1,146 @@
+:root{
+    --ColorGrad1: #1A1A1D;
+    --ColorGrad2: #3B1C32;
+    --ColorGrad3: #6A1E55;
+    --ColorGrad4: #A64D79;
+}
+
+
+.navbar, .navbar-menu.is-active{
+    background-color: var(--ColorGrad1);
+}
+
+.navbar-item{
+    color: white;
+}
+
+.navbar .navbar-item:hover {
+    background-color: var(--link);
+    background: linear-gradient(0.25turn, var(--ColorGrad1), var(--ColorGrad2));
+    color: whitesmoke;
+}
+
+body{
+    color:white;
+    background: linear-gradient(var(--ColorGrad2), var(--ColorGrad1));
+}
+
+.section {
+    padding-top: 2rem;
+}
+
+.title {
+    text-align: center;
+    color: #363636;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(to top, var(--ColorGrad1), var(--ColorGrad2));
+    box-shadow: 10px 20px 20px black;
+    color: white;
+}
+
+.card-image img {
+    object-fit: cover;
+}
+
+.card-content {
+    color:white;
+    padding: 1.5rem;
+    background: linear-gradient(to top, var(--ColorGrad1), var(--ColorGrad2));
+}
+
+.button.is-link {
+    color: white;
+    background: linear-gradient(to left, var(--ColorGrad4), var(--ColorGrad3));
+    font-weight: bold;
+}
+
+.button.is-link:hover {
+    color: white;
+    background: linear-gradient(to left, var(--ColorGrad3), var(--ColorGrad4));
+}
+
+.notification {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.notification.is-danger {
+    background-color: #ff3860;
+    color: white;
+}
+
+.notification.is-success {
+    background-color: #23d160;
+    color: white;
+}
+
+select {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer{
+    background-color: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    font-family: Arial, sans-serif;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+}
+
+.pagination li {
+    display: inline;
+}
+
+.pagination a {
+    display: block;
+    padding: 8px 14px;
+    background-color: var(--ColorGrad3);
+    color: black;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.pagination a:hover {
+    background-color: var(--ColorGrad2);
+    color: white;
+}
+
+.pagination .active a {
+    background-color: var(--ColorGrad4);
+    color: white;
+    pointer-events: none;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .pagination ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pagination a {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+}

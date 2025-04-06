@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Przepisów</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/recipe.css}">
+</head>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+
+        <a href="/index" class="navbar-item">
+            Strona Główna
+        </a>
+
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+
+    <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+            <a href="/recipes" class="navbar-item">Przepisy</a>
+            <a href="/add_recipe" class="navbar-item">Dodaj Przepis</a>
+        </div>
+
+        <div class="navbar-end">
+            <a href="/logout" class="navbar-item">
+                <span>Wyloguj</span>
+            </a>
+        </div>
+    </div>
+</nav>
+<body>
+<section class="section">
+    <div class="container">
+        <h1 class="title has-text-white">Lista Przepisów</h1>
+        <div class="columns is-multiline">
+            <div class="column is-one-third" th:each="recipe : ${recipes}">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img th:src="@{${recipe.imagePath}}" alt="Zdjęcie przepisu">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="title is-4 has-text-white" th:text="${recipe.title}"></h2>
+
+                        <div>
+                        <span th:if="${ratings.containsKey(recipe.id)}">
+                            Średnia ocena: <span th:text="${#numbers.formatDecimal(ratings.get(recipe.id), 1, 1)}"></span> ★
+                        </span>
+                            <span th:if="${!ratings.containsKey(recipe.id)}">Brak ocen</span>
+                        </div>
+
+
+                        <form th:action="@{/recipes/{id}/rate(id=${recipe.id})}" method="post">
+                            <label for="rating">Twoja ocena:</label>
+                            <select id="rating" name="score" required>
+                                <option value="" disabled selected>Wybierz ocenę</option>
+                                <option value="1">✪</option>
+                                <option value="2">✪✪</option>
+                                <option value="3">✪✪✪</option>
+                                <option value="4">✪✪✪✪</option>
+                                <option value="5">✪✪✪✪✪</option>
+                            </select>
+                            <button type="submit">Dodaj ocenę</button>
+                        </form>
+
+                        <div th:if="${error}" class="notification is-danger">
+                            <p th:text="${error}"></p>
+                        </div>
+
+                        <div th:if="${success}" class="notification is-success">
+                            <p th:text="${success}"></p>
+
+                        </div>
+                        <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="button is-link is-fullwidth">Czytaj więcej</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination">
+        <ul>
+            <li th:if="${currentPage > 0}">
+                <a th:href="@{/recipes(page=${currentPage - 1})}">Poprzednia</a>
+            </li>
+
+            <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                th:classappend="${i} == ${currentPage} ? 'active'">
+                <a th:href="@{/recipes(page=${i})}" th:text="${i + 1}"></a>
+            </li>
+
+            <li th:if="${currentPage < totalPages - 1}">
+                <a th:href="@{/recipes(page=${currentPage + 1})}">Następna</a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<div class="footer">
+    <div class="columns">
+
+        <div class="column has-text-centered has-text-white">
+            <p>Copyright © CatFish</p>
+        </div>
+
+        <div class="column">
+            <h4 class="bd-footer-title
+                       has-text-weight-medium
+                       has-text-left
+                       has-text-white">
+                Schedule
+            </h4>
+            <p class="bd-footer-link
+                      has-text-left
+                      has-text-white">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Nullam sed sem ac lorem tincidunt placerat vel quis diam.
+            </p>
+        </div>
+
+        <div class="column">
+            <h4 class="bd-footer-title
+                       has-text-weight-medium
+                       has-text-justify
+                       has-text-white">
+                Address
+            </h4>
+            <p class="bd-footer-link has-text-white">
+                MAI 33, Antananarivo 105, Madagaskar
+            </p>
+
+        </div>
+
+        <div class="column">
+            <h4 class="bd-footer-title
+                       has-text-weight-medium
+                       has-text-justify
+                       has-text-white">
+                Contact us
+            </h4>
+
+            <p class="bd-footer-link has-text-white">
+            <p class="has-text-white">ContactUs@example.com</p>
+            <p class="has-text-white">+261 34 05 024 91 </p>
+            <a href="https://www.sancristobal.mg/">Web Page</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function submitRating(recipeId, score) {
+        fetch(`/recipes/${recipeId}/rate?score=${score}`, { method: 'POST' })
+            .then(response => window.location.reload());
+    }
+
+     document.addEventListener('DOMContentLoaded', () => {
+
+      const burger = document.querySelector('.navbar-burger');
+      const menu = document.querySelector('#navbarMenu');
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+    });
+</script>
+</html>

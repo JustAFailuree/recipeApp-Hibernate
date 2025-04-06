@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/login.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+<section class="login-container">
+    <div class="box">
+        <h1 class="title has-text-centered has-text-white">Logowanie</h1>
+        <form action="/login" method="post">
+            <div class="field">
+                <label class="label has-text-white">Nazwa użytkownika</label>
+                <div class="control">
+                    <input class="input" type="text" name="username" required placeholder="Wpisz nazwę użytkownika">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label has-text-white">Hasło</label>
+                <div class="control">
+                    <input class="input" type="password" name="password" required placeholder="Wpisz hasło">
+                </div>
+            </div>
+
+            <div class="field">
+                <button class="button is-primary is-fullwidth">Zaloguj się</button>
+            </div>
+        </form>
+
+        <div class="has-text-centered mt-3">
+            <p class="has-text-white">Nie masz konta? <a href="/register" class="has-text-link">Zarejestruj się</a></p>
+        </div>
+    </div>
+</section>
+</body>
+</html>
